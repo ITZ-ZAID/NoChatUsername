@@ -1,5 +1,5 @@
 import telegram.ext as tg
-from telegram import ParseMode, Update
+from telegram import ParseMode, Update, CallbackContext
 from telegram.ext import (
     CallbackContext,
     CommandHandler,
@@ -12,12 +12,13 @@ import re
 updater = tg.Updater(BOT_TOKEN, workers=32, use_context=True)
 dispatcher = updater.dispatcher
 
-def start(update: Update, _) -> None:
+
+def start(update: Update, context: CallbackContext):
     chat = update.effective_chat
     msg = update.effective_message
     keyb = []
-    keyb.append([InlineKeyboardButton(text="Add me to your chat ✅", url="http://t.me/MrsNiaBot?startgroup=true")])
-    msg.reply_text("Heya\nI'm AntiChatUsernameBot\nI can restrict which contains public chat username messages", reply_markup=InlineKeyboardMarkup(keyb))
+    keyb.append([InlineKeyboardButton(text="(★) Add me to your chat (★)", url=f"http://t.me/{context.bot.username}?startgroup=true")])
+    msg.reply_text(f"ʜᴇʏᴀ\nɪ'ᴍ ᴀɴᴛɪᴄʜᴀᴛᴜꜱᴇʀɴᴀᴍᴇʙᴏᴛ\nɪ ᴄᴀɴ ʀᴇꜱᴛʀɪᴄᴛ ᴡʜɪᴄʜ ᴄᴏɴᴛᴀɪɴꜱ ᴘᴜʙʟɪᴄ ᴄʜᴀᴛ ᴜꜱᴇʀɴᴀᴍᴇ ᴍᴇꜱꜱᴀɢᴇꜱ", reply_markup=InlineKeyboardMarkup(keyb))
 
 def clean_blue_text_must_click(update: Update, context: CallbackContext):
     bot = context.bot
