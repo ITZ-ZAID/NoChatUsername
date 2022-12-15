@@ -1,3 +1,4 @@
+import telegram.ext as tg
 from telegram import ParseMode, Update
 from telegram.ext import (
     CallbackContext,
@@ -7,6 +8,13 @@ from telegram.ext import (
 )
 from telegram.utils.helpers import mention_html
 import re
+
+def start(update: Update, _) -> None:
+    chat = update.effective_chat
+    msg = update.effective_message
+    keyb = []
+    keyb.append([InlineKeyboardButton(text="Add me to your chat ✅", url="http://t.me/MrsNiaBot?startgroup=true")])
+    msg.reply_text("Heya\nI'm AntiChatUsernameBot\nI can restrict which contains public chat username messages", reply_markup=InlineKeyboardMarkup(keyb))
 
 def clean_blue_text_must_click(update: Update, context: CallbackContext):
     bot = context.bot
@@ -32,10 +40,15 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
              except:
                  return
 
+
 USER = 110
+START = CommandHandler(["start", "ping"], start)
 CLEAN_BLUE_TEXT_HANDLER = MessageHandler(
     Filters.text & Filters.chat_type.groups,
     clean_blue_text_must_click,
     run_async=True,
 )
 dispatcher.add_handler(CLEAN_BLUE_TEXT_HANDLER, USER)
+dispatcher.add_handler(START)
+
+updater.start_polling(timeout=15, read_latency=4, drop_pending_updates=True)
