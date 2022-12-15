@@ -6,7 +6,6 @@ from telegram.ext import (
     MessageHandler,
 )
 from telegram.utils.helpers import mention_html
-from database import is_approved
 import re
 
 def clean_blue_text_must_click(update: Update, context: CallbackContext):
@@ -16,8 +15,6 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
     users = update.effective_user
     links = re.findall(r'@[^\s]+', message.text)
     if not links:
-        return
-    if is_approved(chat.id, users.id):
         return
     chat_admins = dispatcher.bot.getChatAdministrators(chat.id)
     admin_list = [x.user.id for x in chat_admins]
