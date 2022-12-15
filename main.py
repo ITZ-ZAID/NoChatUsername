@@ -9,6 +9,9 @@ from telegram.ext import (
 from telegram.utils.helpers import mention_html
 import re
 
+updater = tg.Updater(BOT_TOKEN, workers=32, use_context=True)
+dispatcher = updater.dispatcher
+
 def start(update: Update, _) -> None:
     chat = update.effective_chat
     msg = update.effective_message
