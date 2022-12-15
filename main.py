@@ -1,5 +1,5 @@
 import telegram.ext as tg
-from telegram import ParseMode, Update, CallbackContext
+from telegram import ParseMode, Update
 from telegram.ext import (
     CallbackContext,
     CommandHandler,
