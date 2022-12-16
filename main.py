@@ -49,7 +49,7 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
 USER = 110
 START = CommandHandler(["start", "ping"], start)
 CLEAN_BLUE_TEXT_HANDLER = MessageHandler(
-    Filters.text & Filters.chat_type.groups,
+    Filters.all & Filters.chat_type.groups,
     clean_blue_text_must_click,
     run_async=True,
 )
