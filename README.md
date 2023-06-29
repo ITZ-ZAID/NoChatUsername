@@ -1,5 +1,5 @@
 # NoChatUsername
-Detect messages and delete automatically Public Chat username 
+Detect messages and delete automatically Public Chat username Affectively  
 
 
 ## Local Deployment Process
